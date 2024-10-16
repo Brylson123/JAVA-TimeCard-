@@ -2,14 +2,11 @@ package com.example.timelog_api.controller;
 
 import com.example.timelog_api.domain.User;
 import com.example.timelog_api.service.UserService;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/")
+
+@RestController
+@RequestMapping("/api")
 public class UserController {
     private final UserService userService;
 
