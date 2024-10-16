@@ -3,11 +3,11 @@ package com.example.timelog_api.controller;
 import com.example.timelog_api.domain.User;
 import com.example.timelog_api.service.LoginService;
 import com.example.timelog_api.service.UserService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
-@RequestMapping("/")
+
+@RestController
+@RequestMapping("/api")
 public class UserController {
     private final UserService userService;
     private final LoginService loginService;
