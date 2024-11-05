@@ -20,14 +20,17 @@ public class WorkLogService {
         this.workLogRepository = workLogRepository;
     }
 
-    public void logStartWork(String cardNumber) {
+    public boolean logStartWork(String cardNumber) {
         User user = userRepository.findUserByCardNumber(cardNumber);
-
+        if(user == null) {
+            return false;
+        }
         WorkLog workLog = new WorkLog();
         workLog.setUser(user);
         workLog.setStartTime(LocalDateTime.now());
 
         workLogRepository.save(workLog);
+        return true;
     }
 
     public void logEndWork(String cardNumber) {

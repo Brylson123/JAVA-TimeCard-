@@ -2,6 +2,7 @@ package com.example.timelog_api.controller;
 
 import com.example.timelog_api.domain.WorkLog;
 import com.example.timelog_api.service.WorkLogService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +21,13 @@ public class WorkLogController {
     @PostMapping("/start/{cardNumber}")
     public ResponseEntity<String> startWork(@PathVariable String cardNumber) {
         try {
-            workLogService.logStartWork(cardNumber);
-            return ResponseEntity.ok("Work started successfully.");
+            if(workLogService.logStartWork(cardNumber)){
+                return ResponseEntity.ok("Work started successfully.");}
+            else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Card number not found");
+            }
+
+
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Error starting work: " + e.getMessage());
         }
