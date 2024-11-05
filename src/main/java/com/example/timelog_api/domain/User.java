@@ -30,6 +30,8 @@ public class User {
     @Size(min = 10, max = 10)
     private String cardNumber;
 
+    private UserRole userRole;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<WorkLog> workLogs;
