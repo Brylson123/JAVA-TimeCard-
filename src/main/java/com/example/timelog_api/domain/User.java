@@ -1,15 +1,15 @@
 package com.example.timelog_api.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -24,9 +24,15 @@ public class User {
     @GeneratedValue
     @UuidGenerator
     private UUID id;
+    @Size(min = 3, max = 51)
+    private String username;
 
-    private String username, cardNumber;
+    @Size(min = 10, max = 10)
+    private String cardNumber;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private List<WorkLog> workLogs;
 
     public User(String username, String cardNumber) {
         this.username = username;
